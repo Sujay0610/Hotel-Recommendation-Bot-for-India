@@ -18,9 +18,7 @@ This chatbot is built using the Langchain library, integrating several key compo
 
 ### 1. Large Language Models (LLM)
 
-The system is designed to work with various LLMs, including:
-- ChatGPT 3.5 turbo (paid)
-- Phi3 (open source)
+The system is designed to work with various LLMs, using the Openrouter API.
 
 ### 2. Prompts
 
