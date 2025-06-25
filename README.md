@@ -1,5 +1,3 @@
-Here's a polished and well-structured `README.md` style document for your **Hotel Recommendation Chatbot for India**, following GitHub conventions:
-
 ---
 
 # 🏨 Hotel-Recommendation-ChatBot-for-India
