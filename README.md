@@ -1,75 +1,128 @@
-# Hotel-Recommendation-ChatBot-for-India
+Here's a polished and well-structured `README.md` style document for your **Hotel Recommendation Chatbot for India**, following GitHub conventions:
 
-This project implements a hotel recommendation chatbot using a combination of Large Language Models (LLMs), vector databases, and various tools to provide personalized hotel suggestions to users.
+---
 
-## Dataset
+# 🏨 Hotel-Recommendation-ChatBot-for-India
 
-The core of this chatbot's knowledge base is derived from the [Indian Hotels on Goibibo](https://www.kaggle.com/datasets/PromptCloudHQ/hotels-on-goibibo?resource=download) dataset. This dataset contains information about hotels in India, featuring crucial information such as hotel names, addresses, and other details relevant for recommendations.
+A smart hotel recommendation chatbot tailored for India, powered by LLMs, RAG (Retrieval-Augmented Generation), and vector databases. It provides personalized hotel suggestions based on real hotel data, enabling natural and helpful interactions with users.
 
-### Data Preparation
+---
 
-Before being utilized by the chatbot, the raw dataset undergoes a cleaning and processing phase. The processed data is then used to create documents, which are vectorized and stored in a ChromaDB vector database. This vector database is integral to the Retrieval Augmented Generation (RAG) mechanism, enabling the LLM to retrieve relevant information efficiently.
+## 📊 Dataset
 
-This implementation focuses on recommending hotels within India, leveraging the provided dataset. The data preparation process involves cleaning and processing this dataset to create documents for the ChromaDB.
+The core knowledge base is built from the [Indian Hotels on Goibibo](https://www.kaggle.com/datasets/PromptCloudHQ/hotels-on-goibibo) dataset. This includes vital information such as hotel names, locations, descriptions, and other metadata crucial for recommendations.
 
-## Implementation Details
+### 🔧 Data Preparation
 
-This chatbot is built using the Langchain library, integrating several key components:
+* Raw CSV data is cleaned and pre-processed.
+* Each hotel entry is transformed into a natural language document.
+* These documents are embedded and stored in **ChromaDB** for fast retrieval using semantic similarity.
 
-### 1. Large Language Models (LLM)
+---
 
-The system is designed to work with various LLMs, using the Openrouter API.
+## ⚙️ Implementation Overview
 
-### 2. Prompts
+Built with the **LangChain** framework and designed for modularity, the system includes:
 
-The chatbot utilizes a ReAct (Reasoning and Acting) prompting style. This approach allows the LLM to engage in a structured thinking process, including selecting appropriate tools, before formulating a final answer. This thinking process involves:
-- **Thought**: The LLM's internal reasoning about the user's query.
-- **Action**: The decision to use a specific tool.
-- **Action Input**: The input provided to the chosen tool.
-- **Observation**: The result obtained from the tool's execution.
-- **Final Answer**: The ultimate response to the user.
+### 🔹 1. **Large Language Models (LLMs)**
 
-### 3. Embeddings
+Compatible with Openrouter API.
 
-Sentence Transformer models are used to generate embeddings for the hotel review documents, facilitating efficient similarity searches within the vector database.
+> The LLM handles conversation flow, user intent recognition, and query resolution.
 
-### 4. Vector Database
+---
 
-ChromaDB serves as the vector database, storing the vectorized hotel review documents. It plays a crucial role in the RAG process, allowing the LLM to retrieve contextually relevant information to answer user queries.
+### 🔹 2. **Prompting Strategy**
 
-### 5. Tools
+Uses a **ReAct (Reasoning + Acting)** prompt format:
 
-The chatbot integrates several tools to enhance its capabilities:
-- **Retriever Tool**: Accesses information from the pre-processed hotel review documents stored in ChromaDB.
-- **Online Search Tool**: Enables the chatbot to search for information not available in its internal knowledge base, providing up-to-date or external data.
+```text
+Thought → Action → Action Input → Observation → Final Answer
+```
 
-### 6. Chat Memory
+This allows the model to:
 
-Conversation history is maintained to provide context for ongoing interactions. This memory allows the chatbot to understand and respond to queries that refer to previous parts of the conversation, ensuring a more natural and coherent user experience.
+* Think through the user query
+* Choose tools (like retrieval or search)
+* Fetch relevant results
+* Provide informed responses
 
-## Running the App
+---
 
-To run the application:
+### 🔹 3. **Embeddings**
 
-1.  Ensure you have a `.env` file in the project's root directory (same level as `src`) containing your OpenAI API key, HuggingFace API key, and SerpAPI key.
-2.  Navigate to the `src` directory:
-    ```commandline
-    cd src
-    ```
-3.  Run the Streamlit application:
-    ```commandline
-    streamlit run app.py
-    ```
+* Embeddings are generated using **Sentence Transformers**.
+* These are used to index hotel documents in the vector database.
+* Supports semantic similarity search for contextual queries.
 
-## Project Structure
+---
 
--   `src/`: Contains the main application scripts.
--   `notebook/`: Includes demo notebooks and exploratory data analysis.
--   `data/`: Stores raw and processed datasets, including the ChromaDB data.
--   `chroma_db/`: Houses the ChromaDB vector store.
+### 🔹 4. **Vector Store: ChromaDB**
 
-## Future Improvements
+* Used to store embedded documents.
+* Enables the RAG mechanism by retrieving contextually relevant chunks for the LLM.
+* Offers fast similarity search at scale.
 
--   Enhance the dataset with more diverse information to reduce reliance on online searches.
--   Further customize and refine the tools for improved accuracy and efficiency.
--   Explore larger and more advanced LLMs (e.g., ChatGPT 4, Llama 3) if computational resources permit.
+---
+
+### 🔹 5. **Integrated Tools**
+
+| Tool                        | Purpose                                  |
+| --------------------------- | ---------------------------------------- |
+| **Retriever**               | Pulls data from embedded hotel documents |
+| **Online Search (SerpAPI)** | Fetches real-time info when needed       |
+
+---
+
+### 🔹 6. **Chat Memory**
+
+Maintains conversation history using LangChain memory to:
+
+* Track previous queries
+* Maintain natural multi-turn interactions
+* Improve coherence across the conversation
+
+---
+
+## ▶️ Running the App
+
+1. **Set up your `.env` file** at the root level:
+
+```
+OPENAI_API_KEY=your_openai_key
+SERPAPI_API_KEY=your_serpapi_key
+```
+
+2. **Navigate to the `src/` folder**:
+
+```bash
+cd src
+```
+
+3. **Launch the app with Streamlit**:
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 📁 Project Structure
+
+```bash
+├── src/                # Main app code (LangChain logic, agent, etc.)
+├── data/               # Raw & processed data
+├── chroma_db/          # Vector DB for storing hotel embeddings
+├── notebook/           # EDA and experiment notebooks
+└── .env                # API keys and config
+```
+
+---
+
+## 🚀 Future Improvements
+
+* Add more metadata.
+* Support for multilingual queries.
+
+---
+
